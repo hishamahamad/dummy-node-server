@@ -10,7 +10,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (request, response) => {
-  console.log(request.cookies);
+  console.log('cookies', request.cookies);
   response.json({
     leads: [
       {id: 1, lead_name: 'Ramu'},
