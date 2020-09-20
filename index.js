@@ -4,7 +4,13 @@ const app = express();
 
 app.use(CookieParser());
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.get('/', (request, response) => {
+  console.log(request.cookies);
   response.json({
     leads: [
       {id: 1, lead_name: 'Ramu'},
