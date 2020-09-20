@@ -1,15 +1,19 @@
 const express = require('express');
 const CookieParser = require('cookie-parser');
+var cors = require('cors');
 const app = express();
 
 app.use(CookieParser());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
+app.use(cors());
+app.options('*', cors());
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//   next();
+// });
 
 app.get('/', (request, response) => {
   console.log('headers', request.headers);
