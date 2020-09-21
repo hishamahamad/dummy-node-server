@@ -6,7 +6,7 @@ const app = express();
 app.use(CookieParser());
 
 app.use(cors());
-app.options('*', cors());
+// app.options('*', cors());
 
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*');
@@ -16,17 +16,21 @@ app.options('*', cors());
 // });
 
 app.get('/', (request, response) => {
-  console.log('headers', request.headers);
-  response.json({
-    leads: [
-      { id: 1, lead_name: 'Ramu' },
-      { id: 2, lead_name: 'Shamu' }
-    ],
-    bids: [
-      { id: 1, bidder_name: 'Bob', value: 3000 },
-      { id: 2, bidder_name: 'Bobby', value: 5000 }
-    ]
-  })
+  const auth = request.headers.authorization;
+  if(auth) {
+    response.json({
+      leads: [
+        { id: 1, lead_name: 'Ramu' },
+        { id: 2, lead_name: 'Shamu' }
+      ],
+      bids: [
+        { id: 1, bidder_name: 'Bob', value: 3000 },
+        { id: 2, bidder_name: 'Bobby', value: 5000 }
+      ]
+    })
+  } else {
+    response.status(403).send('Access denied.')
+  }
 })
 
 app.listen(3300, () => {
