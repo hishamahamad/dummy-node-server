@@ -16,6 +16,7 @@ app.use(cors());
 // });
 
 app.get('/', (request, response) => {
+  console.log('cookies', request.cookies);
   const auth = request.headers.authorization;
   if(auth) {
     response.json({
