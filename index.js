@@ -49,6 +49,6 @@ app.get('/setcookie-httponly', (request, response) => {
     } 
 })
 
-app.listen(3300, () => {
-  console.log('Server is up on 3300')
+app.listen(3500, () => {
+  console.log('Server is up on 3500')
 });
