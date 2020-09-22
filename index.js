@@ -40,7 +40,7 @@ app.get('/setcookie-httponly', (request, response) => {
       // no: set a new cookie
       var randomNumber=Math.random().toString();
       randomNumber=randomNumber.substring(2,randomNumber.length);
-      response.cookie('session_id',randomNumber, { maxAge: 900000, httpOnly: true, sameSite: 'None', secure: true });
+      response.cookie('session_id',randomNumber, { maxAge: 900000, httpOnly: true, sameSite: 'None', secure: true, domain: '.blockbuck.tech' });
       console.log('cookie created successfully');
       response.status(200).send('cookie set succesfully.')
     } else {
