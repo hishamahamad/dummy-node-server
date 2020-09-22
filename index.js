@@ -16,8 +16,7 @@ app.use(cors());
 // });
 
 app.get('/', (request, response) => {
-  console.log('cookies', request.cookies);
-  const auth = request.cookies.session_id;
+  const auth = request.headers.Authorization;
   if(auth) {
     response.json({
       leads: [
@@ -34,13 +33,14 @@ app.get('/', (request, response) => {
   }
 })
 
+
 app.get('/setcookie-httponly', (request, response) => {
     var cookie = request.cookies.session_id;
     if (cookie === undefined) {
       // no: set a new cookie
       var randomNumber=Math.random().toString();
       randomNumber=randomNumber.substring(2,randomNumber.length);
-      response.cookie('session_id',randomNumber, { maxAge: 900000, httpOnly: true, sameSite: 'None', secure: true, domain: '.blockbuck.tech' });
+      response.cookie('session_id',randomNumber, { maxAge: 900000, httpOnly: true, sameSite: 'None', secure: true });
       console.log('cookie created successfully');
       response.status(200).send('cookie set succesfully.')
     } else {
