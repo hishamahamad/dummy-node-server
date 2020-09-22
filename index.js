@@ -16,7 +16,8 @@ app.use(cors());
 // });
 
 app.get('/', (request, response) => {
-  const auth = request.headers.Authorization;
+  const auth = request.headers.authorization;
+  console.log(request.headers);
   if(auth) {
     response.json({
       leads: [
