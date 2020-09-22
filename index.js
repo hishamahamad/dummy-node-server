@@ -17,7 +17,7 @@ app.use(cors());
 
 app.get('/', (request, response) => {
   console.log('cookies', request.cookies);
-  const auth = request.headers.session_id;
+  const auth = request.cookies.session_id;
   if(auth) {
     response.json({
       leads: [
