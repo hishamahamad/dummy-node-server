@@ -34,6 +34,21 @@ app.get('/', (request, response) => {
   }
 })
 
+app.get('/setcookie-httponly', (request, response) => {
+    var cookie = request.cookies.session_id;
+    if (cookie === undefined) {
+      // no: set a new cookie
+      var randomNumber=Math.random().toString();
+      randomNumber=randomNumber.substring(2,randomNumber.length);
+      response.cookie('session_id',randomNumber, { maxAge: 900000, httpOnly: true, sameSite: 'None' });
+      console.log('cookie created successfully');
+      response.status(200).send('cookie set succesfully.')
+    } else {
+      // yes, cookie was already present 
+      console.log('hurray cookie exists', cookie);
+    } 
+})
+
 app.listen(3300, () => {
   console.log('Server is up on 3300')
 });
